@@ -15,7 +15,9 @@ const SearchResults = (props: Props) => {
             <label htmlFor={`modal-${result.id}`} className="modal-button">
               <ResultCard
                 result={result}
-                imgUrl={result.poster_path ? `https://image.tmdb.org/t/p/w500${result.poster_path}` : "/images/no_image.png"}
+                imgUrl={
+                  result.poster_path ? `https://image.tmdb.org/t/p/w500${result.poster_path}` : '/images/no_image.png'
+                }
               />
             </label>
             <input type="checkbox" id={`modal-${result.id}`} className="modal-toggle" />
