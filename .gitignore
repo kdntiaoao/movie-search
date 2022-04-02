@@ -33,3 +33,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# lint config file
+.prettierrc
+.eslintrc.json
