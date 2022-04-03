@@ -1,64 +1,29 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../components/Layout'
-import Image from 'next/image'
 import { SearchForm } from 'components/SearchForm'
 import { useEffect, useState } from 'react'
 import { Data } from 'types/data'
 import { SearchResults } from 'components/SearchResults'
 
 const Home: NextPage = () => {
-  const [word, setWord] = useState('')
-  const [page, setPage] = useState(1)
   const [data, setData] = useState<Data>()
 
-  const changeWord = (word: string) => {
-    console.log('changeWord:', word)
-    setPage(1)
-    setWord(word)
-  }
-
-  const nextPage = () => {
-    console.log('next page')
-    setPage((prevState) => {
-      if (data?.total_pages && prevState >= data.total_pages) {
-        return prevState
-      }
-      window.scrollTo(0, 0)
-      return ++prevState
-    })
-  }
-
-  const prevPage = () => {
-    console.log('previous page')
-    setPage((prevState) => {
-      if (data?.total_pages && prevState <= 1) {
-        return prevState
-      }
-      window.scrollTo(0, 0)
-      return --prevState
-    })
-  }
-
   useEffect(() => {
-    if (!word) {
-      return
-    }
-
     fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=57585d1e9624443028acab0f0647ea14&language=ja-JP&include_adult=false&region=JP&query=${word}&page=${page}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=57585d1e9624443028acab0f0647ea14&language=ja-JP&region=JP&include_adult=false&page=1`
     )
       .then((res) => res.json())
       .then((json) => {
         if (json) {
-          console.log('fetch:', json)
+          console.log('fetch(popularity):', json)
           setData(json)
         }
       })
       .catch((error) => {
         console.error(error)
       })
-  }, [word, page])
+  }, [])
 
   return (
     <Layout>
@@ -68,23 +33,9 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="wrapper my-10">
-        <SearchForm onClick={changeWord} />
+        <SearchForm />
+        <h2 className="text-lg font-bold mb-10 pl-2 border-l-4 border-primary">人気のある作品</h2>
         <SearchResults data={data} />
-        <div className="btn-group justify-center">
-          {data?.total_pages && (
-            <div className="btn-group">
-              <button className="btn" onClick={prevPage}>
-                «
-              </button>
-              <button className="btn">
-                Page {page} / {data.total_pages}
-              </button>
-              <button className="btn" onClick={nextPage}>
-                »
-              </button>
-            </div>
-          )}
-        </div>
       </div>
     </Layout>
   )

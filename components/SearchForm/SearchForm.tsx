@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { EmptyMessage } from './index'
 
-const SearchForm = (props: { onClick: (word: string) => void }) => {
+const SearchForm = () => {
   const [word, setWord] = useState('')
   const [isEmpty, setIsEmpty] = useState(false)
+  const router = useRouter()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWord(event.target.value)
@@ -14,8 +16,10 @@ const SearchForm = (props: { onClick: (word: string) => void }) => {
     if (!word) {
       setIsEmpty(true)
     } else {
+      const urlObject = { pathname: '/search', query: { word: word, page: '1' } }
       setIsEmpty(false)
-      props.onClick(word)
+      setWord('')
+      router.push(urlObject)
     }
   }
 
