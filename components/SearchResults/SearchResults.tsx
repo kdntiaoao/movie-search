@@ -21,15 +21,22 @@ const SearchResults = (props: Props) => {
               />
             </label>
             <input type="checkbox" id={`modal-${result.id}`} className="modal-toggle" />
+            {/* 映画の詳細情報を表示するモーダル */}
             <label htmlFor={`modal-${result.id}`} className="modal cursor-pointer">
               <label className="modal-box relative" htmlFor="">
-                <h3 className="text-lg font-bold mb-4">{result.title}</h3>
+                {/* タイトル */}
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold">{result.title}</h3>
+                  {result.original_title && result.original_title !== result.title && <p>{result.original_title}</p>}
+                </div>
+                {/* あらすじ */}
                 {result.overview && (
                   <div className="mb-4">
                     <h4 className="font-bold">あらすじ</h4>
                     <p>{result.overview}</p>
                   </div>
                 )}
+                {/* 公開日 */}
                 {result.release_date && (
                   <div>
                     <h4 className="font-bold">公開日</h4>

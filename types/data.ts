@@ -1,7 +1,8 @@
 export type Result = Readonly<{
   id: number
-  overview: string
-  poster_path: string | null
+  original_title?: string
+  overview?: string
+  poster_path?: string | null
   release_date?: string
   title: string
 }>

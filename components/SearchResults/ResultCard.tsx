@@ -9,7 +9,7 @@ type Props = {
 const ResultCard = (props: Props) => (
   <div className="card card-compact bg-base-100 shadow-xl h-full">
     <figure className="w-full aspect-[2/3] relative">
-      <Image src={props.imgUrl} alt={`${props.result.title}のポスター画像`} layout="fill" objectFit="cover" />
+      <Image src={props.imgUrl} alt={`${props.result.title}のポスター画像`} layout="fill" objectFit="cover" priority />
     </figure>
     <div className="card-body">
       <h2 className="card-title text-sm xs:text-base">{props.result.title}</h2>

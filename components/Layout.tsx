@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
 
 type Props = {
   children?: ReactNode
