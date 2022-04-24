@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=57585d1e9624443028acab0f0647ea14&language=ja-JP&region=JP&include_adult=false&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=57585d1e9624443028acab0f0647ea14&language=ja-JP&sort_by=release_date.desc&region=JP&include_adult=false&page=1`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
 
       <div className="wrapper my-10">
         <SearchForm />
-        <h2 className="text-lg font-bold mb-10 pl-2 border-l-4 border-primary">人気のある作品</h2>
+        <h2 className="text-lg font-bold mb-10 pl-2 border-l-4 border-primary">最近の作品</h2>
         <SearchResults data={data} />
       </div>
     </Layout>
